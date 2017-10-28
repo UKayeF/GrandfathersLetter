@@ -1,4 +1,4 @@
-function createOuterWalls()
+function createOuterWalls2()
   for i = 2, 28 do
     tileSet[1][i] = wH
     tileSet[16][i] = wH
@@ -9,7 +9,7 @@ function createOuterWalls()
   end
 end
 
-function createInnerWalls()
+function createInnerWalls2()
   for i = 1, 6 do
     tileSet[i][13] = wV
     tileSet[i][17] = wV
@@ -41,7 +41,7 @@ function createInnerWalls()
   end
 end
 
-function createDoors()
+function createDoors2()
   tileSet[7][24] = dH
   tileSet[10][15] = dH
   tileSet[10][21] = dH
@@ -53,7 +53,7 @@ function createDoors()
   end
 end
 
-function createObjects()
+function createObjects2()
   tileSet[3][14] = sC
   tileSet[2][10] = pup
   if hasLadder then tileSet [8][2] = g
