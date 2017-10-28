@@ -1,23 +1,43 @@
 function love.load()
 	require('./src/eventTrigger')
 	require('./src/level1')
-	playerX, playerY,facing, x,y,w,h =5,5,0, 0, 0, 1920, 1080
-	ghost = love.graphics.newImage("DisturbedGuy.png")
-	g = love.graphics.newImage("Fliesenmuster.png")
-	wV = love.graphics.newImage("Wall_Vertical.png")
-	wH = love.graphics.newImage("Wall_Horizontal.png")
-	dV = love.graphics.newImage("VerticalDoor.png")
-	dH = love.graphics.newImage('Door_Horizontal.png')
-	darkness = love.graphics.newImage("Black.png")
-	player  =  love.graphics.newImage("Balotelli.png")
-	ghostTable = {}
-	cheapVfx = love.graphics.newImage("crappyExplosion.png")
-	monster = {}
-	monster.x, monster.y = 1, 1
+	require('./src/functions')
+	--  Alle Sprites hier rein! --
+	g = love.graphics.newImage("spritesheets/Fliesenmuster.png")
+	ghost = love.graphics.newImage("spritesheets/DisturbedGuy.png")
+	wV = love.graphics.newImage("spritesheets/Wall_Vertical.png")
+	wH = love.graphics.newImage("spritesheets/Wall_Horizontal.png")
+	dV = love.graphics.newImage("spritesheets/VerticalDoor.png")
+	dH = love.graphics.newImage('spritesheets/Door_Horizontal.png')
+	vBtW = love.graphics.newImage('spritesheets/Vampire.png')
+	storeCabinet = love.graphics.newImage('spritesheets/storeCabinet.png')
+	elkHeadOnTheWall = love.graphics.newImage('spritesheets/Moose.png')
+	sC = love.graphics.newImage('spritesheets/Staircase.png')
+	darkness = love.graphics.newImage("spritesheets/Black.png")
+	player  =  love.graphics.newImage("spritesheets/BoyI.png")
+	cheapVfx = love.graphics.newImage("spritesheets/crappyExplosion.png")
+	pup = love.graphics.newImage("spritesheets/Puppet.png")
+	lad = love.graphics.newImage("spritesheets/Ladder.png")
+	bS = love.graphics.newImage("spritesheets/Bookshelf.png")
+	cH = love.graphics.newImage("spritesheets/ceilingHatch.png")
+	dVO = love.graphics.newImage("spritesheets/doorVerticalOpen.png")
+	--  Globale Variablen hier rein! --
+	playerX, playerY,facing, x,y,w,h =15,15,0, 0, 0, 1920, 1080
+	-- für Level 1--
+	monster, moose, garlicObj, vampireObj, stairCaseObj, ghostTable, tileSet = {}, {}, {}, {}, {}, {}, {}
+	vampireObj.x, vampireObj.y, stairCaseObj.x, stairCaseObj.y, monster.x, moose.x, garlicObj.x, monster.y, moose.y, garlicObj.y = 16, 4, 16, 3,1, 25, 3, 1, 2, 2
+	hasKey1, hasGarlic, level1Completed, moose.hasVisited, vampireObj.isDead  = false, false, false, false, false
+	-- für Level 2 --
+	ladderObj, noteObj, hatchObj, puppetObj, closetDoorObj = {}, {}, {}, {}, {}
+	ladderObj.x, ladderObj.y, noteObj.x, noteObj.y, hatchObj.x, hatchObj.y, puppetObj.x, puppetObj.y, closetDoorObj.x, closetDoorObj.y = 2, 8, 2, 11, 23, 14, 10, 2, 5, 8
+	hasKey2, closetDoorObj.open, hasLadder, ladderPlaced = false, false, false, false
 	mainFont = love.graphics.newFont(20)
 	largeFont = love.graphics.newFont(64)
-	tileSet = {}
 	setTiles()
+end
+
+function ascendToLevel2()
+	msg("Congratulations!")
 end
 
 function love.draw()
@@ -25,11 +45,12 @@ function love.draw()
 	createInnerWalls()
 	createOuterWalls()
 	createDoors()
+	createObjects()
 	love.graphics.setColor(224, 224, 224)
 	love.graphics.rectangle("fill", x, y, w, h)
 	createMesh()
 	--createFloor()
-	drawTiles(darkness)
+	drawTiles()
 
 	love.graphics.setColor(255,255,255)
 	--love.graphics.draw(ghost, 1, 1)
@@ -42,25 +63,23 @@ function love.draw()
 		draw(cheapVfx, playerX, playerY)
 		end
 	end
-	if inRange(1, ghostTable.ghostP) then
-		youDied()
-	end
 	triggerEventsLevel1()
 end
 
 
 function love.keypressed(key)
 	keyP = key
-	if keyP == "w"
-	then	playerY = playerY - 1
-	elseif keyP == "s"
-	then	playerY = playerY + 1
-	elseif keyP == "a"
-	then	playerX = playerX - 1
-	elseif keyP == "d"  then
-		playerX = playerX + 1
+	if (testMovement(playerX, playerY,keyP)) == true then
+		if keyP == "w"
+		then	playerY, facing = playerY - 1, 0
+		elseif keyP == "s"
+		then	playerY, facing = playerY + 1, 2
+		elseif keyP == "a"
+		then	playerX, facing = playerX - 1, 3
+		elseif keyP == "d"  then
+			playerX, facing = playerX + 1, 1
+		end
 	end
-
 end
 
 function createMesh()
@@ -89,7 +108,7 @@ function createFloor()
 end
 
 function inRange(a, b)
-	if  math.abs(playerY - b.y) + math.abs(playerX - b.x) <= a  then
+	if  math.abs(playerY - b.y) + math.abs(playerX - b.x) == a  then
 	return true
 	else
 	return false
@@ -113,7 +132,7 @@ function setTiles()
 	end
 end
 
-function drawTiles(a)
+function drawTiles()
 	love.graphics.setColor(255,255,255)
 	for py = 1, #tileSet do
 		for px = 1, #tileSet[py] do
