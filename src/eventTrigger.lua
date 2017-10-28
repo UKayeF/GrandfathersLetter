@@ -1,4 +1,4 @@
-function triggerEventsLevel1()
+--[[function triggerEventsLevel1()
   if playerX == elkX and playerY == elkY and facing == elkFacing and not hasKey1 then
     elkHead()
   end
@@ -98,6 +98,14 @@ function attic()
     --show message: their is a hatch in the ceiling, it probably gives acces to the attic. Unfortunately it is to high to reach
   end
 end
-
+--]]
+function msg(message)
+  msgFnt = love.graphics.newFont(48)
+  love.graphics.setFont(msgFnt)
+  love.graphics.setColor(48,48,48)
+  love.graphics.rectangle("fill", 480, 240, 960, 600)
+  love.graphics.setColor(224, 224, 224)
+	love.graphics.print(message, 720, 480)
+end
 
   -- benötigte globale Variablen: bookX, bookY, bookFacing, keyX, keyY, keyFacing, closetX, closetY, closetFacing, atticX, atticY, ladderX, ladderY, ladderFacing, hasKey = false, hasLadder = false, closetDoorOpen = false
