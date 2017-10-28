@@ -44,16 +44,16 @@ function ascendToLevel2()
 end
 
 function triggerEventsLevel2()
-  if playerX == bookX and playerY == bookY and facing == bookFacing then
+  if inRange(1, noteObj) then
     readNote()
   end
-  if playerX == keyX and playerY == keyY and facing == keyFacing and not hasKey2 then
+  if inRange(1, puppetObj) then
     ripKeyOut()
   end
-  if playerX == closetX and playerY == closetY and facing == closetFacing and not closetDoorOpen then
+  if inRange(1, closetDoorObj) and not closetDoorObj.open then
     closetDoor()
   end
-  if playerX == ladderX and playerY == ladderY and facing == ladderFacing then
+  if inRange(1, ladderObj) then
     aquireLadder()
   end
   if playerX == atticX and playerY == atticY then
@@ -65,36 +65,35 @@ end
 -- ladderX, ladderY, ladderFacing, hasKey2 = false, hasLadder = false, closetDoorOpen = false
 
 function readNote()
-  --show note
+  if inRange(1, noteObj) then
+    msg("You look through the bookshelf and find a note inside your grandfathers favorite book. It reads: Do not dwell in the past. Rip it apart in order to become a new man.")
 end
 
 function ripKeyOut()
-  --show disturbing Message
-  hasKey2 = true
+  msg("In an unexpected explosion of Rage, you rip apart the doll that you loved as a child. Inside you find another key.")
+  hasKey2 = love.keyboard.isScancodeDown("return")
 end
 
 function closetDoor()
   if hasKey2 then
-    --show Message: The door is now unlocked
-    --swtich door tile to open door tile
-    closetDoorOpen = true
-  else
-    --show Message: the door is locked, it seems a key is needed to open it
+    msg("You open the door with the second key you got. Behind it seems to be a small closet")
+    closetDoorObj.open = love.keyboard.isScancodeDown("return")
+  elseif inRange(1, closetDoorObj) then
+    msg("The door is locked. It seems a key is needed to open it")
   end
 end
 
 function aquireLadder()
-  --show message: you take the ladder
-  --delete LadderTile
-  hasLadder = true
+  msg("You find a ladder an take it with you")
+  hasLadder = love.keyboard.isScancodeDown("return")
 end
 
 function attic()
   if hasLadder then
-    --show Message about placing the ladder and gaining access to the attic
-    --place LadderTile
+    msg("You place the ladder under the hatch. Now you are able to acces the attic!")
+    ladderPlaced = love.keyboard.isScancodeDown("return")
   else
-    --show message: their is a hatch in the ceiling, it probably gives acces to the attic. Unfortunately it is to high to reach
+    msg("There is a hatch in the ceiling. It probably gives acces to the attic. Unfortunately it is to high to reach")
   end
 end
 
