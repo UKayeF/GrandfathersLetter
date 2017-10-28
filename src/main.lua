@@ -2,7 +2,6 @@ function love.load()
 	require('./src/eventTrigger')
 	require('./src/level1')
 	require('./src/functions')
-	require('./src/level2')
 	--  Alle Sprites hier rein! --
 	g = love.graphics.newImage("spritesheets/Fliesenmuster.png")
 	ghost = love.graphics.newImage("spritesheets/DisturbedGuy.png")
@@ -15,53 +14,44 @@ function love.load()
 	elkHeadOnTheWall = love.graphics.newImage('spritesheets/Moose.png')
 	sC = love.graphics.newImage('spritesheets/Staircase.png')
 	darkness = love.graphics.newImage("spritesheets/Black.png")
-	player  =  love.graphics.newImage("spritesheets/BoyI.png")
+	player  =  love.graphics.newImage("spritesheets/Balotelli.png")
 	cheapVfx = love.graphics.newImage("spritesheets/crappyExplosion.png")
-	pup = love.graphics.newImage("spritesheets/Puppet.png")
-	lad = love.graphics.newImage("spritesheets/Ladder.png")
-	bS = love.graphics.newImage("spritesheets/Bookshelf.png")
+	pup = love.graphics.newImage("spritesheets/puppet.png")
+	lad = love.graphics.newImage("spritesheets/ladder.png")
+	bS = love.graphics.newImage("spritesheets/bookShelf.png")
 	cH = love.graphics.newImage("spritesheets/ceilingHatch.png")
 	dVO = love.graphics.newImage("spritesheets/doorVerticalOpen.png")
 	--  Globale Variablen hier rein! --
-	currentLevel, playerX, playerY,facing, x,y,w,h = 2, 15,15,0, 0, 0, 1920, 1080
+	playerX, playerY,facing, x,y,w,h =15,15,0, 0, 0, 1920, 1080
 	-- für Level 1--
 	monster, moose, garlicObj, vampireObj, stairCaseObj, ghostTable, tileSet = {}, {}, {}, {}, {}, {}, {}
 	vampireObj.x, vampireObj.y, stairCaseObj.x, stairCaseObj.y, monster.x, moose.x, garlicObj.x, monster.y, moose.y, garlicObj.y = 16, 4, 16, 3,1, 25, 3, 1, 2, 2
-	hasKey1, hasGarlic, moose.hasVisited, vampireObj.isDead  = false, false, false, false
+	hasKey1, hasGarlic, level1Completed, moose.hasVisited, vampireObj.isDead  = false, false, false, false, false
 	-- für Level 2 --
 	ladderObj, noteObj, hatchObj, puppetObj, closetDoorObj = {}, {}, {}, {}, {}
 	ladderObj.x, ladderObj.y, noteObj.x, noteObj.y, hatchObj.x, hatchObj.y, puppetObj.x, puppetObj.y, closetDoorObj.x, closetDoorObj.y = 2, 8, 2, 11, 23, 14, 10, 2, 5, 8
-	hasKey2, closetDoorObj.open, hasLadder, ladderPlaced, level1Completed = false, false, false, false, false
+	hasKey2, closetDoorObj.open, hasLadder, ladderPlaced = false, false, false, false
 	mainFont = love.graphics.newFont(20)
 	largeFont = love.graphics.newFont(64)
 	setTiles()
 end
 
-function love.update()
-	if level1Completed then
-		currentLevel = 2
-	end
+function ascendToLevel2()
+	msg("Congratulations!")
 end
-
 
 function love.draw()
 	love.graphics.setColor(255, 255, 255)
-	if currentLevel == 1 then
-		createInnerWalls()
-		createOuterWalls()
-		createDoors()
-		createObjects()
-	elseif currentLevel == 2 then
-		createInnerWalls2()
-		createOuterWalls2()
-		createDoors2()
-		createObjects2()
-	end
+	createInnerWalls()
+	createOuterWalls()
+	createDoors()
+	createObjects()
 	love.graphics.setColor(224, 224, 224)
 	love.graphics.rectangle("fill", x, y, w, h)
 	createMesh()
 	--createFloor()
 	drawTiles()
+
 	love.graphics.setColor(255,255,255)
 	--love.graphics.draw(ghost, 1, 1)
 	draw(ghost, 3, 3)
@@ -73,11 +63,7 @@ function love.draw()
 		draw(cheapVfx, playerX, playerY)
 		end
 	end
-	if currentLevel == 1 then
-		triggerEventsLevel1()
-	elseif currentLevel == 2 then
-		triggerEventsLevel2()
-	end
+	triggerEventsLevel1()
 end
 
 

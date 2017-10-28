@@ -40,14 +40,13 @@ end
 function ascendToLevel2()
   msg("You have completed Level 1! You badass mofo!")
   level1Completed = love.keyboard.isScancodeDown("return")
-  --load level 2
 end
 
 function triggerEventsLevel2()
   if inRange(1, noteObj) then
     readNote()
   end
-  if inRange(1, puppetObj) then
+  if inRange(1, puppetObj) and not hasKey2 then
     ripKeyOut()
   end
   if inRange(1, closetDoorObj) and not closetDoorObj.open then
@@ -56,7 +55,7 @@ function triggerEventsLevel2()
   if inRange(1, ladderObj) then
     aquireLadder()
   end
-  if playerX == atticX and playerY == atticY then
+  if inRange(0, hatchObj) then
     attic()
   end
 end
@@ -67,6 +66,7 @@ end
 function readNote()
   if inRange(1, noteObj) then
     msg("You look through the bookshelf and find a note inside your grandfathers favorite book. It reads: Do not dwell in the past. Rip it apart in order to become a new man.")
+  end
 end
 
 function ripKeyOut()
