@@ -1,4 +1,4 @@
-function setVisionArea(x, y, visionRange)
+--[[function setVisionArea(x, y, visionRange)
 	vArea = {}
   for i 0, visionRange do
     for j 0, visionrange do
@@ -9,8 +9,37 @@ function setVisionArea(x, y, visionRange)
     end
   end
   return vArea
+end]]--
+
+function testMovement(playerX,playerY, keyPressed)
+	if keyPressed == "w" then
+		local posX, posY = playerX, playerY - 1
+		local tile = tileSet[posY][posX]
+		if tile ~= wV and tile ~= wH then
+			return true
+		end
+		elseif keyPressed == "s" then
+		local posX, posY = playerX, playerY + 1
+		local tile = tileSet[posY][posX]
+		if tile ~= wV and tile ~= wH then
+			return true
+		end
+		elseif keyPressed == "a" then
+			local posX, posY = playerX - 1, playerY
+			local tile = tileSet[posY][posX]
+			if tile ~= wV and tile ~= wH then
+				return true
+			end
+		elseif keyPressed == "d" then
+			local posX, posY = playerX + 1, playerY
+			local tile = tileSet[posY][posX]
+			if tile ~= wV and tile ~= wH then
+				return true
+			end
+		end
 end
 
+--[[
 function setLightCone()
   lightCone{}
   if facing == 0 then
@@ -42,4 +71,4 @@ function setLightCone()
       table.insert(lightCone, lCPos)
     end
   end
-end
+end]]--

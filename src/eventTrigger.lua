@@ -1,33 +1,28 @@
 function triggerEventsLevel1()
 
-  if inRange(2, moose) and hasKey1 and not moose.hasVisited then
-    hasVisitedMoose = true
-  end
-  if inRange(1, moose) and not moose.hasVisited then
-    elkHead(facing)
+  if inRange(1, moose) and not hasKey1 then
+    elkHead()
   end
   if inRange(1, garlicObj) and not hasGarlic then
     garlic()
   end
-  if playerX == vampireX and playerY == vampireY and facing == vampireFacing then
+  if inRange(1, vampireObj) and not vampireObj.isDead then
     vampire()
   end
-  if playerX == stairCaseX and playerY == stairCaseY then
+  if inRange(0, stairCaseObj) and not level1Completed then
     ascendToLevel2()
   end
 end
 
-function elkHead(a)
+function elkHead()
   msg("You investigate the stuffed moose head on the wall. In a niche behind it you find a key")
-  if inRange(0, moose) then
-    hasKey1 = true
-  end
+    hasKey1 = love.keyboard.isScancodeDown("return")
 end
 
 function garlic()
   if hasKey1 then
     msg("You use the key you found to open the storage cabinet. Inside There is some garlic. You take it with you.")
-    hasGarlic = true
+    hasGarlic = love.keyboard.isScancodeDown("return")
   else
     msg("The stock cabinet is locked. It seems a key is needed to open it.")
   end
@@ -36,13 +31,15 @@ end
 function vampire()
   if hasGarlic then
     msg("The vampire flees in terror due to the stink of the garlic you are holding.")
-    --remove vampire tile
+    vampireObj.isDead = love.keyboard.isScancodeDown("return")
   else
     msg("A fearsome vampire is blocking the Way. There is no way through.")
   end
 end
 
 function ascendToLevel2()
+  msg("You have completed Level 1! You badass mofo!")
+  level1Completed = love.keyboard.isScancodeDown("return")
   --load level 2
 end
 

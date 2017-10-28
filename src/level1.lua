@@ -42,15 +42,19 @@ function createDoors()
   tileSet[11][6] = dH
   tileSet[11][15] = dH
   -- ab hier vertikele türeturn
-  tileSet[6][13] = dH
-  tileSet[6][17] = dH
-  tileSet[9][17] = dH
-  tileSet[14][11] = dH
-  tileSet[14][21] = dH
+  tileSet[6][13] = dV
+  tileSet[6][17] = dV
+  tileSet[9][17] = dV
+  tileSet[14][11] = dV
+  tileSet[14][21] = dV
 end
 
 function createObjects()
-  tileSet[2][1] = storeCabinet
+  tileSet[2][3] = storeCabinet
   tileSet[2][25] = elkHeadOnTheWall
-  tileSet[4][16] = vampireBlockingTheWay
-  tileSet[3][16] = stairCaseToLevel2
+  if not vampireObj.isDead then tileSet[4][16] = vBtW
+  else tileSet[4][16] = g
+  end
+  tileSet[2][16] = wV
+  tileSet[3][16] = sC
+end
