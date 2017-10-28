@@ -1,10 +1,13 @@
 function love.load()
+	require('./src/eventTrigger')
+	require('./src/level1')
 	playerX, playerY,facing, x,y,w,h =5,5,0, 0, 0, 1920, 1080
-	ghost = love.graphics.newImage("Ghost.png")
+	ghost = love.graphics.newImage("DisturbedGuy.png")
 	g = love.graphics.newImage("Fliesenmuster.png")
 	wV = love.graphics.newImage("Wall_Vertical.png")
 	wH = love.graphics.newImage("Wall_Horizontal.png")
-	dH = love.graphics.newImage("Door_Horizontal.png")
+	dV = love.graphics.newImage("VerticalDoor.png")
+	dH = love.graphics.newImage('Door_Horizontal.png')
 	darkness = love.graphics.newImage("Black.png")
 	player  =  love.graphics.newImage("Balotelli.png")
 	ghostTable = {}
@@ -18,19 +21,16 @@ function love.load()
 end
 
 function love.draw()
+	love.graphics.setColor(255, 255, 255)
+	createInnerWalls()
+	createOuterWalls()
+	createDoors()
 	love.graphics.setColor(224, 224, 224)
 	love.graphics.rectangle("fill", x, y, w, h)
 	createMesh()
-	createFloor()
+	--createFloor()
 	drawTiles(darkness)
-	for i = 1, 29, 1 do
-		draw(wH, i, 1)
-		draw(wH, i, 16)
-	end
-	for i = 1, 16, 1 do
-		draw(wV, 1, i)
-		draw(wV, 29, i)
-	end
+
 	love.graphics.setColor(255,255,255)
 	--love.graphics.draw(ghost, 1, 1)
 	draw(ghost, 3, 3)
@@ -45,8 +45,8 @@ function love.draw()
 	if inRange(1, ghostTable.ghostP) then
 		youDied()
 	end
+	triggerEventsLevel1()
 end
-
 
 
 function love.keypressed(key)
@@ -108,14 +108,16 @@ function setTiles()
 	for i = 1, 33 do
 		tileSet[i] = {}
 		for j = 1, 47 do
-				tileSet[i][j] = darkness
+				tileSet[i][j] = g
 		end
 	end
 end
 
 function drawTiles(a)
+	love.graphics.setColor(255,255,255)
 	for py = 1, #tileSet do
 		for px = 1, #tileSet[py] do
+			a = tileSet[py][px]
 			draw(a, px, py)
 		end
 	end
