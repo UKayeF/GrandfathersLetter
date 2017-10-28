@@ -46,7 +46,7 @@ function triggerEventsLevel2()
   if inRange(1, noteObj) then
     readNote()
   end
-  if inRange(1, puppetObj) then
+  if inRange(1, puppetObj) and not hasKey2 then
     ripKeyOut()
   end
   if inRange(1, closetDoorObj) and not closetDoorObj.open then
@@ -55,7 +55,7 @@ function triggerEventsLevel2()
   if inRange(1, ladderObj) then
     aquireLadder()
   end
-  if playerX == atticX and playerY == atticY then
+  if inRange(0, hatchObj) then
     attic()
   end
 end

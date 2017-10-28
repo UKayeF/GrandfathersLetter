@@ -18,7 +18,7 @@ function createInnerWalls2()
     tileSet[i][19] = wV
   end
   for i = 7, 9 do
-    tileSet[i][5]
+    tileSet[i][5] = wV
   end
   tileSet[2][15] = wV
   tileSet[2][14] = wH
@@ -56,8 +56,8 @@ end
 function createObjects2()
   tileSet[3][14] = sC
   tileSet[2][10] = pup
-  if hasLadder then tileSet [8][2] = g
-  else [8][2] = lad
+  if hasLadder then tileSet[8][2] = g
+  else tileSet[8][2] = lad
   end
   tileSet[11][2] = bS
   if ladderPlaced then tileSet[14][23] = lad
