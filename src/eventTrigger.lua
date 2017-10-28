@@ -1,6 +1,9 @@
 function triggerEventsLevel1()
 
-  if inRange(1, moose) and not hasKey1 then
+  if inRange(2, moose) and hasKey1 and not moose.hasVisited then
+    hasVisitedMoose = true
+  end
+  if inRange(1, moose) and not moose.hasVisited then
     elkHead(facing)
   end
   if inRange(1, garlicObj) and not hasGarlic then
