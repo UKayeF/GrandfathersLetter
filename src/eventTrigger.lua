@@ -1,9 +1,9 @@
 function triggerEventsLevel1()
 
-  if playerX == elkX and playerY == elkY and facing == elkFacing and not hasKey1 then
-    elkHead()
+  if inRange(1, moose) and not hasKey1 then
+    elkHead(facing)
   end
-  if playerX == garlicX and playerY == garlicY and facing == garlicFacing and not hasGarlic then
+  if inRange(1, garlicObj) and not hasGarlic then
     garlic()
   end
   if playerX == vampireX and playerY == vampireY and facing == vampireFacing then
@@ -14,9 +14,11 @@ function triggerEventsLevel1()
   end
 end
 
-function elkHead()
+function elkHead(a)
   msg("You investigate the stuffed moose head on the wall. In a niche behind it you find a key")
-  hasKey1 = true
+  if inRange(0, moose) then
+    hasKey1 = true
+  end
 end
 
 function garlic()
