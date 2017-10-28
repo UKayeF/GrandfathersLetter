@@ -1,6 +1,6 @@
 function triggerEventsLevel1()
-  --msg('hallo welt!')
-  --[[if playerX == elkX and playerY == elkY and facing == elkFacing and not hasKey1 then
+
+  if playerX == elkX and playerY == elkY and facing == elkFacing and not hasKey1 then
     elkHead()
   end
   if playerX == garlicX and playerY == garlicY and facing == garlicFacing and not hasGarlic then
@@ -11,39 +11,35 @@ function triggerEventsLevel1()
   end
   if playerX == stairCaseX and playerY == stairCaseY then
     ascendToLevel2()
-  end--]]
+  end
 end
 
 function elkHead()
-  --message about hidden key
+  msg("You investigate the stuffed moose head on the wall. In a niche behind it you find a key")
   hasKey1 = true
 end
 
 function garlic()
   if hasKey1 then
-    --message about finding some garlic in the stock cabinet
+    msg("You use the key you found to open the storage cabinet. Inside There is some garlic. You take it with you.")
     hasGarlic = true
   else
-    --message: the stock cabinet is locked. It seems a key is needed to open it
+    msg("The stock cabinet is locked. It seems a key is needed to open it.")
   end
 end
 
 function vampire()
   if hasGarlic then
-    --message about the vampire fleeing
+    msg("The vampire flees in terror due to the stink of the garlic you are holding.")
     --remove vampire tile
   else
-    --message about the vampire blocking the way
-    --move player back one tile
+    msg("A fearsome vampire is blocking the Way. There is no way through.")
   end
 end
 
 function ascendToLevel2()
   --load level 2
 end
-
--- benötigte globale Variablen: elkX, elkY, elkFacing, garlicX, garlicY, garlicFacing, vampireX, vampireY, vampireFacing, stairCaseX, stairCaseY,
--- hasKey1 = false, hasGarlic = false
 
 function triggerEventsLevel2()
   if playerX == bookX and playerY == bookY and facing == bookFacing then
