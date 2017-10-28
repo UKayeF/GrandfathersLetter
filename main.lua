@@ -1,14 +1,20 @@
 function love.load()
-	playerX, playerY, x,y,w,h =15,15, 0, 0, 1920, 1080
+	playerX, playerY,facing, x,y,w,h =5,5,0, 0, 0, 1920, 1080
 	ghost = love.graphics.newImage("Ghost.png")
 	g = love.graphics.newImage("Fliesenmuster.png")
 	wV = love.graphics.newImage("Wall_Vertical.png")
 	wH = love.graphics.newImage("Wall_Horizontal.png")
 	dH = love.graphics.newImage("Door_Horizontal.png")
+	darkness = love.graphics.newImage("Black.png")
 	player  =  love.graphics.newImage("Balotelli.png")
 	ghostTable = {}
 	cheapVfx = love.graphics.newImage("crappyExplosion.png")
- 
+	monster = {}
+	monster.x, monster.y = 1, 1
+	mainFont = love.graphics.newFont(20)
+	largeFont = love.graphics.newFont(64)
+	tileSet = {}
+	setTiles()
 end
 
 function love.draw()
@@ -16,11 +22,12 @@ function love.draw()
 	love.graphics.rectangle("fill", x, y, w, h)
 	createMesh()
 	createFloor()
+	drawTiles(darkness)
 	for i = 1, 29, 1 do
 		draw(wH, i, 1)
 		draw(wH, i, 16)
 	end
-	for i = 1, 16, 1 do 
+	for i = 1, 16, 1 do
 		draw(wV, 1, i)
 		draw(wV, 29, i)
 	end
@@ -28,30 +35,36 @@ function love.draw()
 	--love.graphics.draw(ghost, 1, 1)
 	draw(ghost, 3, 3)
 	ghostTable.ghostP = {}
-	ghostTable.ghostP.x, ghostTable.ghostP.y = 3, 3 
+	ghostTable.ghostP.x, ghostTable.ghostP.y = 3, 3
 	draw(player, playerX, playerY)
-	for key, val in pairs(ghostTable)  do 
+	for key, val in pairs(ghostTable)  do
 		if val.x == playerX and val.y == playerY then
 		draw(cheapVfx, playerX, playerY)
 		end
 	end
+	if inRange(1, ghostTable.ghostP) then
+		youDied()
+	end
 end
+
+
 
 function love.keypressed(key)
 	keyP = key
 	if keyP == "w"
 	then	playerY = playerY - 1
 	elseif keyP == "s"
-	then	playerY = playerY + 1 
+	then	playerY = playerY + 1
 	elseif keyP == "a"
 	then	playerX = playerX - 1
 	elseif keyP == "d"  then
 		playerX = playerX + 1
 	end
+
 end
 
-function createMesh() 
-	love.graphics.setColor(192,128,128)	
+function createMesh()
+	love.graphics.setColor(192,128,128)
 	for i = 0, 1914, 66 do
 		love.graphics.line(i,0,i, 1056)
 	end
@@ -71,6 +84,39 @@ function createFloor()
 	for i = 0, 29, 1 do
 		for j = 0, 16, 1 do
 			draw(g, i, j)
+		end
+	end
+end
+
+function inRange(a, b)
+	if  math.abs(playerY - b.y) + math.abs(playerX - b.x) <= a  then
+	return true
+	else
+	return false
+	end
+end
+
+function youDied()
+	love.graphics.setColor(0,0,0)
+	love.graphics.rectangle("fill", 480, 240, 960, 600)
+	love.graphics.setColor(224, 64, 64)
+	love.graphics.setFont(largeFont)
+	love.graphics.print("You Died!", 720, 480)
+end
+
+function setTiles()
+	for i = 1, 33 do
+		tileSet[i] = {}
+		for j = 1, 47 do
+				tileSet[i][j] = darkness
+		end
+	end
+end
+
+function drawTiles(a)
+	for py = 1, #tileSet do
+		for px = 1, #tileSet[py] do
+			draw(a, px, py)
 		end
 	end
 end
