@@ -24,7 +24,7 @@ function love.load()
 	dVO = love.graphics.newImage("spritesheets/doorVerticalOpen.png")
 	dHO = love.graphics.newImage("spritesheets/doorHorizontalOpen.png")
 	--  Globale Variablen hier rein! --
-	currentLevel, playerX, playerY,facing, x,y,w,h = 2, 15,15,0, 0, 0, 1920, 1080
+	currentLevel, playerX, playerY,facing, x,y,w,h = 1, 15,15,0, 0, 0, 1920, 1080
 	-- für Level 1--
 	monster, moose, garlicObj, vampireObj, stairCaseObj, ghostTable, tileSet = {}, {}, {}, {}, {}, {}, {}
 	vampireObj.x, vampireObj.y, stairCaseObj.x, stairCaseObj.y, monster.x, moose.x, garlicObj.x, monster.y, moose.y, garlicObj.y = 16, 4, 16, 3,1, 25, 3, 1, 2, 2
