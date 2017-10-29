@@ -32,6 +32,8 @@ function love.load()
 	ladderObj.x, ladderObj.y, noteObj.x, noteObj.y, hatchObj.x, hatchObj.y, puppetObj.x, puppetObj.y, closetDoorObj.x, closetDoorObj.y = 2, 8, 2, 11, 23, 14, 10, 2, 5, 8
 	hasKey2, closetDoorObj.open, hasLadder, ladderPlaced = false, false, false, false
 	mainFont = love.graphics.newFont(20)
+	nA = {}
+	initnA()
 	largeFont = love.graphics.newFont(64)
 	setTiles()
 end
@@ -140,4 +142,10 @@ function drawTiles()
 			draw(a, px, py)
 		end
 	end
+end
+function initnA()
+	table.insert(nA, wH)
+ 	table.insert(nA,wV)
+	table.insert(nA,vBtW)
+	table.insert(nA,storeCabinet )
 end
