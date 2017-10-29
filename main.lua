@@ -22,6 +22,7 @@ function love.load()
 	bS = love.graphics.newImage("spritesheets/Bookshelf.png")
 	cH = love.graphics.newImage("spritesheets/ceilingHatch.png")
 	dVO = love.graphics.newImage("spritesheets/doorVerticalOpen.png")
+	dHO = love.graphics.newImage("spritesheets/doorHorizontalOpen.png")
 	--  Globale Variablen hier rein! --
 	currentLevel, playerX, playerY,facing, x,y,w,h = 2, 15,15,0, 0, 0, 1920, 1080
 	-- für Level 1--
@@ -159,7 +160,9 @@ function drawTiles()
 end
 function initnA()
 	table.insert(nA, wH)
- 	table.insert(nA,wV)
-	table.insert(nA,vBtW)
-	table.insert(nA,storeCabinet )
+ 	table.insert(nA, wV)
+	table.insert(nA, vBtW)
+	table.insert(nA, storeCabinet)
+	table.insert(nA, dV)
+	table.insert(nA, dH)
 end

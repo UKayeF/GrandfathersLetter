@@ -52,8 +52,8 @@ function triggerEventsLevel2()
   if inRange(1, closetDoorObj) and not closetDoorObj.open then
     closetDoor()
   end
-  if inRange(1, ladderObj) then
-    aquireLadder()
+  if inRange(1, ladderObj) and not hasLadder then
+    acquireLadder()
   end
   if inRange(0, hatchObj) then
     attic()
@@ -80,7 +80,7 @@ function closetDoor()
   end
 end
 
-function aquireLadder()
+function acquireLadder()
   msg("You find a ladder an take it with you")
   hasLadder = love.keyboard.isScancodeDown("return")
 end

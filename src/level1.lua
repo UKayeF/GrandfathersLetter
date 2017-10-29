@@ -38,15 +38,15 @@ function createInnerWalls()
 end
 
 function createDoors()
-  tileSet[5][7] = dH
-  tileSet[11][6] = dH
-  tileSet[11][15] = dH
+  tileSet[5][7] = dHO
+  tileSet[11][6] = dHO
+  tileSet[11][15] = dHO
   -- ab hier vertikele türeturn
-  tileSet[6][13] = dV
-  tileSet[6][17] = dV
-  tileSet[9][17] = dV
-  tileSet[14][11] = dV
-  tileSet[14][21] = dV
+  tileSet[6][13] = dVO
+  tileSet[6][17] = dVO
+  tileSet[9][17] = dVO
+  tileSet[14][11] = dVO
+  tileSet[14][21] = dVO
 end
 
 function createObjects()
