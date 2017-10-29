@@ -60,9 +60,6 @@ function triggerEventsLevel2()
   end
 end
 
--- benötigte globale Variablen: bookX, bookY, bookFacing, keyX2, keyY2, keyFacing2, closetX, closetY, closetFacing, atticX, atticY,
--- ladderX, ladderY, ladderFacing, hasKey2 = false, hasLadder = false, closetDoorOpen = false
-
 function readNote()
   if inRange(1, noteObj) then
     msg("You look through the bookshelf and find a note inside your grandfathers favorite book. It reads: Do not dwell in the past. Rip it apart in order to become a new man.")
