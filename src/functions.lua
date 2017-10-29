@@ -1,15 +1,15 @@
---[[function setVisionArea(x, y, visionRange)
+function setVisionArea(x, y, visionRange)
 	vArea = {}
-  for i 0, visionRange do
-    for j 0, visionrange do
+  for i = -2, visionRange do
+    for j = -2, visionRange do
       vPos = {}
-      vPos.x = x - visionRange + i
-      vPos.y = y - visionRange + j
-      table.insert(vArea, pos)
+      vPos.x = x - visionRange + i + 2
+      vPos.y = y - visionRange + j + 2
+      table.insert(vArea, vPos)
     end
   end
   return vArea
-end]]--
+end
 
 function testMovement(playerX,playerY, keyPressed)
 	if keyPressed == "w" then
@@ -53,7 +53,8 @@ function testMovement(playerX,playerY, keyPressed)
 		end
 end
 
-	--[[
+--function setVision(playerX,playerY)
+--[[
 function setLightCone()
   lightCone{}
   if facing == 0 then
@@ -85,4 +86,4 @@ function setLightCone()
       table.insert(lightCone, lCPos)
     end
   end
-end]]--
+end]]
