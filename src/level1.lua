@@ -33,7 +33,7 @@ function createInnerWalls()
     tileSet[11][i] = wH
   end
   for i = 18, 20 do
-    tileSet[i][7] = wH
+    tileSet[7][i] = wH
   end
 end
 
