@@ -1,7 +1,7 @@
---[[function setVisionArea(x, y, visionRange)
+function setVisionArea(x, y, visionRange)
 	vArea = {}
-  for i 0, visionRange do
-    for j 0, visionrange do
+  for i = 0, visionRange do
+    for j = 0, visionrange do
       vPos = {}
       vPos.x = x - visionRange + i
       vPos.y = y - visionRange + j
@@ -9,7 +9,7 @@
     end
   end
   return vArea
-end]]--
+end
 
 function testMovement(playerX,playerY, keyPressed)
 	if keyPressed == "w" then
