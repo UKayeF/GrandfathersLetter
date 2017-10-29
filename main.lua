@@ -69,6 +69,7 @@ function love.draw()
 	love.graphics.rectangle("fill", x, y, w, h)
 	createMesh()
 	--createFloor()
+	drawDark()
 	drawTiles()
 	love.graphics.setColor(255,255,255)
 	--love.graphics.draw(ghost, 1, 1)
@@ -159,7 +160,12 @@ function drawTiles()
 	for py = 1, #tileSet do
 		for px = 1, #tileSet[py] do
 			a = tileSet[py][px]
-			draw(a, px, py)
+			visible = setVisionArea(playerX, playerY, 2)
+			for i = 1, #visible do
+				if visible[i].x == px and visible[i].y == py then
+						draw(a, px, py)
+					end
+				end
 		end
 	end
 end
@@ -170,4 +176,8 @@ function initnA()
 	table.insert(nA, storeCabinet)
 	table.insert(nA, dV)
 	table.insert(nA, dH)
+end
+function drawDark()
+	love.graphics.setColor(0,0,0)
+	love.graphics.rectangle("fill", 0, 0, 1920, 1080)
 end
