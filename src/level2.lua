@@ -55,11 +55,17 @@ end
 
 function createObjects2()
   tileSet[3][14] = sC
-  tileSet[2][10] = pup
+  if not hasKey2 then
+    tileSet[2][10] = pup
+  else tileSet[2][10] = cheapVfx
+  end
   if hasLadder then tileSet[8][2] = g
   else tileSet[8][2] = lad
   end
-  tileSet[11][2] = bS
+  for i = 2, 13 do
+    tileSet[11][i] = bS
+    tileSet[13][i] = bS
+  end
   if ladderPlaced then tileSet[14][23] = lad
   else tileSet[14][23] = cH
   end

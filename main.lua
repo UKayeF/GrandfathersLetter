@@ -176,6 +176,7 @@ function initnA()
 	table.insert(nA, storeCabinet)
 	table.insert(nA, dV)
 	table.insert(nA, dH)
+	table.insert(nA, bS)
 end
 function drawDark()
 	love.graphics.setColor(0,0,0)
