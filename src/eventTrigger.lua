@@ -16,13 +16,13 @@ end
 
 function elkHead()
   msg("You investigate the stuffed moose head on the wall. In a niche behind it you find a key")
-    hasKey1 = love.keyboard.isScancodeDown("return")
+    hasKey1 = love.keyboard.isScancodeDown("e")
 end
 
 function garlic()
   if hasKey1 then
     msg("You use the key you found to open the storage cabinet. Inside There is some garlic. You take it with you.")
-    hasGarlic = love.keyboard.isScancodeDown("return")
+    hasGarlic = love.keyboard.isScancodeDown("e")
   else
     msg("The stock cabinet is locked. It seems a key is needed to open it.")
   end
@@ -31,7 +31,7 @@ end
 function vampire()
   if hasGarlic then
     msg("The vampire flees in terror due to the stink of the garlic you are holding.")
-    vampireObj.isDead = love.keyboard.isScancodeDown("return")
+    vampireObj.isDead = love.keyboard.isScancodeDown("e")
   else
     msg("A fearsome vampire is blocking the Way. There is no way through.")
   end
@@ -39,7 +39,7 @@ end
 
 function ascendToLevel2()
   msg("You have completed Level 1! You badass mofo!")
-  level1Completed = love.keyboard.isScancodeDown("return")
+  level1Completed = love.keyboard.isScancodeDown("e")
 end
 
 function triggerEventsLevel2()
@@ -52,8 +52,8 @@ function triggerEventsLevel2()
   if inRange(1, closetDoorObj) and not closetDoorObj.open then
     closetDoor()
   end
-  if inRange(1, ladderObj) then
-    aquireLadder()
+  if inRange(1, ladderObj) and not hasLadder then
+    acquireLadder()
   end
   if inRange(0, hatchObj) then
     attic()
@@ -68,27 +68,27 @@ end
 
 function ripKeyOut()
   msg("In an unexpected explosion of Rage, you rip apart the doll that you loved as a child. Inside you find another key.")
-  hasKey2 = love.keyboard.isScancodeDown("return")
+  hasKey2 = love.keyboard.isScancodeDown("e")
 end
 
 function closetDoor()
   if hasKey2 then
     msg("You open the door with the second key you got. Behind it seems to be a small closet")
-    closetDoorObj.open = love.keyboard.isScancodeDown("return")
+    closetDoorObj.open = love.keyboard.isScancodeDown("e")
   elseif inRange(1, closetDoorObj) then
     msg("The door is locked. It seems a key is needed to open it")
   end
 end
 
-function aquireLadder()
+function acquireLadder()
   msg("You find a ladder an take it with you")
-  hasLadder = love.keyboard.isScancodeDown("return")
+  hasLadder = love.keyboard.isScancodeDown("e")
 end
 
 function attic()
   if hasLadder then
     msg("You place the ladder under the hatch. Now you are able to acces the attic!")
-    ladderPlaced = love.keyboard.isScancodeDown("return")
+    ladderPlaced = love.keyboard.isScancodeDown("e")
   else
     msg("There is a hatch in the ceiling. It probably gives acces to the attic. Unfortunately it is to high to reach")
   end
@@ -100,7 +100,7 @@ function msg(message)
   love.graphics.rectangle("fill", 480, 240, 960, 600)
   love.graphics.setColor(224, 224, 224)
 	love.graphics.setFont(msgFont)
-	love.graphics.print(message, 720, 480)
+	love.graphics.printf(message, 540, 300, 840, "center")
 end
 
 

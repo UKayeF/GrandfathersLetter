@@ -42,12 +42,12 @@ function createInnerWalls2()
 end
 
 function createDoors2()
-  tileSet[7][24] = dH
-  tileSet[10][15] = dH
-  tileSet[10][21] = dH
+  tileSet[7][24] = dHO
+  tileSet[10][15] = dHO
+  tileSet[10][21] = dHO
   -- ab hier vertikale türen
-  tileSet[5][13] = dV
-  tileSet[5][17] = dV
+  tileSet[5][13] = dVO
+  tileSet[5][17] = dVO
   if closetDoorObj.open then tileSet[8][5] = dVO
   else tileSet[8][5] = dV
   end

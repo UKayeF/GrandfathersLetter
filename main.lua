@@ -22,8 +22,9 @@ function love.load()
 	bS = love.graphics.newImage("spritesheets/Bookshelf.png")
 	cH = love.graphics.newImage("spritesheets/ceilingHatch.png")
 	dVO = love.graphics.newImage("spritesheets/doorVerticalOpen.png")
+	dHO = love.graphics.newImage("spritesheets/doorHorizontalOpen.png")
 	--  Globale Variablen hier rein! --
-	currentLevel, playerX, playerY,facing, x,y,w,h = 2, 15,15,0, 0, 0, 1920, 1080
+	currentLevel, playerX, playerY,facing, x,y,w,h = 1, 15,15,0, 0, 0, 1920, 1080
 	-- für Level 1--
 	monster, moose, garlicObj, vampireObj, stairCaseObj, ghostTable, tileSet = {}, {}, {}, {}, {}, {}, {}
 	vampireObj.x, vampireObj.y, stairCaseObj.x, stairCaseObj.y, monster.x, moose.x, garlicObj.x, monster.y, moose.y, garlicObj.y = 16, 4, 16, 3,1, 25, 3, 1, 2, 2
@@ -31,8 +32,10 @@ function love.load()
 	-- für Level 2 --
 	ladderObj, noteObj, hatchObj, puppetObj, closetDoorObj = {}, {}, {}, {}, {}
 	ladderObj.x, ladderObj.y, noteObj.x, noteObj.y, hatchObj.x, hatchObj.y, puppetObj.x, puppetObj.y, closetDoorObj.x, closetDoorObj.y = 2, 8, 2, 11, 23, 14, 10, 2, 5, 8
-	hasKey2, closetDoorObj.open, hasLadder, ladderPlaced, level1Completed = false, false, false, false, false
+	hasKey2, closetDoorObj.open, hasLadder, ladderPlaced, level1Completed, playerSet = false, false, false, false, false, false
 	mainFont = love.graphics.newFont(20)
+	nA = {}
+	initnA()
 	largeFont = love.graphics.newFont(64)
 	setTiles()
 end
@@ -52,6 +55,11 @@ function love.draw()
 		createDoors()
 		createObjects()
 	elseif currentLevel == 2 then
+		if playerSet == false then
+			playerX, playerY, playerSet = 14, 3, true
+		end
+		setTiles()
+		drawTiles()
 		createInnerWalls2()
 		createOuterWalls2()
 		createDoors2()
@@ -64,9 +72,9 @@ function love.draw()
 	drawTiles()
 	love.graphics.setColor(255,255,255)
 	--love.graphics.draw(ghost, 1, 1)
-	draw(ghost, 3, 3)
-	ghostTable.ghostP = {}
-	ghostTable.ghostP.x, ghostTable.ghostP.y = 3, 3
+	--draw(ghost, 3, 3)
+	--ghostTable.ghostP = {}
+	--ghostTable.ghostP.x, ghostTable.ghostP.y = 3, 3
 	draw(player, playerX, playerY)
 	for key, val in pairs(ghostTable)  do
 		if val.x == playerX and val.y == playerY then
@@ -154,4 +162,12 @@ function drawTiles()
 			draw(a, px, py)
 		end
 	end
+end
+function initnA()
+	table.insert(nA, wH)
+ 	table.insert(nA, wV)
+	table.insert(nA, vBtW)
+	table.insert(nA, storeCabinet)
+	table.insert(nA, dV)
+	table.insert(nA, dH)
 end
