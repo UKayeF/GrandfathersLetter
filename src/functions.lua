@@ -13,33 +13,47 @@ end]]--
 
 function testMovement(playerX,playerY, keyPressed)
 	if keyPressed == "w" then
-		local posX, posY = playerX, playerY - 1
-		local tile = tileSet[posY][posX]
-		if tile ~= wV and tile ~= wH then
-			return true
+		 posX, posY = playerX, playerY - 1
+		 tile = tileSet[posY][posX]
+		for i = 1, #nA do
+			if  nA[i] == tile  then
+				return false
+			end
 		end
-		elseif keyPressed == "s" then
-		local posX, posY = playerX, playerY + 1
-		local tile = tileSet[posY][posX]
-		if tile ~= wV and tile ~= wH then
-			return true
+		return true
+	elseif keyPressed == "s" then
+		 posX, posY = playerX, playerY + 1
+		 tile = tileSet[posY][posX]
+		for i = 1, #nA do
+			if  nA[i] == tile  then
+				return false
+			end
 		end
+		return true
 		elseif keyPressed == "a" then
-			local posX, posY = playerX - 1, playerY
-			local tile = tileSet[posY][posX]
-			if tile ~= wV and tile ~= wH then
-				return true
+			 posX, posY = playerX - 1, playerY
+			 tile = tileSet[posY][posX]
+			for i = 1, #nA do
+				if  nA[i] == tile  then
+					return false
+				end
 			end
+			return true
 		elseif keyPressed == "d" then
-			local posX, posY = playerX + 1, playerY
-			local tile = tileSet[posY][posX]
-			if tile ~= wV and tile ~= wH then
-				return true
+			 posX, posY = playerX + 1, playerY
+			 tile = tileSet[posY][posX]
+			for i = 1, #nA do
+				if  nA[i] == tile  then
+					return false
+				end
 			end
+			return true
+		else
+
 		end
 end
 
---[[
+	--[[
 function setLightCone()
   lightCone{}
   if facing == 0 then

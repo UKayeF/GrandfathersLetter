@@ -67,6 +67,7 @@ end
 function readNote()
   if inRange(1, noteObj) then
     msg("You look through the bookshelf and find a note inside your grandfathers favorite book. It reads: Do not dwell in the past. Rip it apart in order to become a new man.")
+  end
 end
 
 function ripKeyOut()
@@ -103,7 +104,7 @@ function msg(message)
   love.graphics.rectangle("fill", 480, 240, 960, 600)
   love.graphics.setColor(224, 224, 224)
 	love.graphics.setFont(msgFont)
-	love.graphics.print(message, 720, 480)
+	love.graphics.printf(message, 540, 300, 840, "center")
 end
 
 
