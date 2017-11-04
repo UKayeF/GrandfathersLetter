@@ -3,11 +3,11 @@
 
 
 ### How To Extract ###
-* Download Zip Archive *
-* Open Download Folder *
-* Right click on Zip Archive *
-* Choose 'Extract' *
-* Choose 'Extract All' *
-* Accept *
+1. Download Zip Archive 
+2. Open Download Folder 
+3. Right click on Zip Archive 
+4. Choose 'Extract' 
+5. Choose 'Extract All' 
+6. Accept 
 
 You're welcome, Daniel!
